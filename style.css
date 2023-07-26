@@ -1,0 +1,274 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Karla', 'Inter', sans-serif;
+    background-color: #2B283A;
+    margin: 0;
+}
+
+.app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.875rem 1.25rem;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    border-radius: 0.7rem;
+    text-align: center;
+}
+
+.main-header {
+    color: #2B283A;
+    font-size: 1.8rem;
+    font-weight: bolder;
+    margin-top: 6rem;
+}
+
+.main-par {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    text-align: center;
+    color: #4A4E74;
+    font-size: 0.8125rem;
+    max-width: 300px;
+    margin-bottom: 3rem;
+}
+
+.dice-container {
+    display: grid;
+    grid-template: auto auto / repeat(5, 1fr);
+    gap: 1.5rem;
+}
+
+.dice {
+    height: 60px;
+    width: 60px;
+    box-shadow: 1px 3px rgb(15, 10, 159),
+        3px 1px rgb(15, 10, 159),
+        3px 3px rgb(15, 10, 159),
+        2px 4px 4px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #2B283A;
+    background-color: #4730d8;
+    cursor: pointer;
+    animation-name: diceRoll;
+    animation-timing-function: ease-out;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    transition: 0.3s;
+}
+
+.dice:active {
+    /* background-color: #5c45f7; */
+    filter: hue-rotate(-5deg) brightness(1.1);
+    transform: scale(1.1);
+}
+
+.dot {
+    display: block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+
+}
+
+.dotAnim {
+    animation-name: blurEffect;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
+.face {
+    display: grid;
+    grid-template-areas:
+        ". . . . ."
+        "a . . . c"
+        "e . g . f"
+        "d . . . b"
+        ". . . . .";
+    gap: 0.2rem;
+
+}
+
+
+
+.pip:nth-child(1) {
+    grid-area: a;
+}
+
+.pip:nth-child(2) {
+    grid-area: b;
+}
+
+.pip:nth-child(3) {
+    grid-area: c;
+}
+
+.pip:nth-child(4) {
+    grid-area: d;
+}
+
+.pip:nth-child(5) {
+    grid-area: e;
+}
+
+.pip:nth-child(6) {
+    grid-area: f;
+}
+
+.pip:nth-child(odd):last-child {
+    grid-area: g;
+}
+
+
+
+button {
+    margin-top: 2rem;
+    padding: 0.6rem 2.5rem;
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-size: bold;
+    color: white;
+    background-color: #5035FF;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: 0.185s;
+    margin-bottom: 2rem;
+}
+
+button:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+    transform: scale(1.01);
+    background-color: #3821d3;
+
+}
+
+button:active {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.8);
+    background-color: #1e0c97;
+    color: #c4c4c7;
+    transform: scale(0.99);
+}
+
+.clicked {
+    background-color: #59E391;
+    box-shadow: 1px 3px #118941,
+        3px 1px #118941,
+        3px 3px #118941,
+        2px 4px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+.winner-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(30, 12, 151, 0.8);
+    padding: 1rem 5rem;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+
+}
+
+.winner {
+    color: rgb(126, 240, 139);
+}
+
+.track-rolls.done {
+    color: rgb(133, 226, 144);
+}
+
+.track-rolls.done span {
+    font-size: 1.5rem;
+    color: rgb(0, 255, 247);
+}
+
+.track-rolls {
+    font-size: 1.325rem;
+    font-weight: 900;
+    color: #2B283A;
+    margin: 0;
+    margin-top: 0.2rem;
+}
+
+
+.track-rolls span {
+    margin-left: 1rem;
+    font-size: 1.75rem;
+    color: rgb(30, 76, 228);
+}
+
+
+
+@keyframes winnerTab {
+    0% {
+        transform: scale(0) rotate(-60deg);
+    }
+
+    60% {
+        transform: scale(1.2) rotate(30deg);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes diceRoll {
+    from {
+        transform: rotate(-100deg);
+    }
+
+    to {
+        transform: rotate(1000deg);
+    }
+
+}
+
+@keyframes blurEffect {
+    from {
+        background-color: #4730d8;
+        filter: blur(2px);
+    }
+
+    to {
+        background-color: #ffffff;
+    }
+}
