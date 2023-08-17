@@ -2,7 +2,7 @@ import React from "react";
 import { nanoid } from "nanoid";
 
 export default function Die(props) {
-  function allDots() {
+  function AllDots() {
     let dots = [];
     for (let i = 0; i < props.value; i++) {
       dots.push(
@@ -12,12 +12,16 @@ export default function Die(props) {
     return dots;
   }
 
+  function dieClick() {
+    props.changeHeld(props.id);
+  }
+
   return (
     <div
       className={`dice face ${props.isHeld && "clicked"}`}
-      onClick={() => props.changeHeld(props.id)}
+      onClick={dieClick}
     >
-      {allDots()}
+      {<AllDots />}
       {/* <span className="dot"> </span> */}
     </div>
   );

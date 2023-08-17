@@ -7,7 +7,7 @@ export default function App() {
   const [dice, setDice] = React.useState(randNumb());
   const [diceElements, setDiceElements] = React.useState([]);
   const [tenzies, setTenzies] = React.useState(false);
-  const [countDice, setCountDice] = React.useState(1);
+  const [countDice, setCountDice] = React.useState(0);
   const [records, setRecords] = React.useState(
     () => JSON.parse(localStorage.getItem("records")) || {}
   );
@@ -76,9 +76,6 @@ export default function App() {
           JSON.stringify({
             bestRolls: countDice,
             bestTime: time,
-            // bestRolls:
-            //   countDice < records.bestRolls ? countDice : records.bestRolls,
-            // bestTime: time < records.bestTime ? time : records.bestTime,
           })
         );
       }
